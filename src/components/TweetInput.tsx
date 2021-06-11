@@ -10,7 +10,7 @@ firebase.firestore().settings({
   ignoreUndefinedProperties: true
 })
 
-const TweetInput = () => {
+const TweetInput: React.FC = () => {
   const user = useSelector(selectUser)
   const [tweetImage, setTweetImage] = useState<File | null>(null)
   const [tweetMsg, setTweetMsg] = useState('')
