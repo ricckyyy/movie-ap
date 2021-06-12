@@ -3,7 +3,7 @@ import { db } from '../../firebase'
 import TweetInput from '../TweetInput'
 import style from './Feed.module.css'
 import { PostAdd } from '@material-ui/icons'
-import Post from '../Post'
+import Post from '../templates/Post'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 class Test extends Component {
