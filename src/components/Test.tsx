@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import Feed from './Feed'
+import Feed from './pages/Feed'
 
 const Test = () => {
   return (
