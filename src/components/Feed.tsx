@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 import { db } from '../firebase'
 import TweetInput from './TweetInput'
 import style from './Feed.module.css'
 import { PostAdd } from '@material-ui/icons'
 import Post from './Post'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+
+class Test extends Component {
+  render () {
+    return <h1>test</h1>
+  }
+}
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState([
@@ -22,7 +29,7 @@ const Feed: React.FC = () => {
       .orderBy('timestamp', 'desc')
       .onSnapshot(snapshot =>
         setPosts(
-          snapshot.docs.map((doc) => ({
+          snapshot.docs.map(doc => ({
             id: doc.id,
             avatar: doc.data().avatar,
             image: doc.data().image,
@@ -39,25 +46,32 @@ const Feed: React.FC = () => {
 
   return (
     <div className={style.feed}>
-      <TweetInput />
-      {
-  posts[0]?.id && (
-    <>
-      {posts.map(post => (
-        <Post
-          key={post.id}
-          postId={post.id}
-          avatar={post.avatar}
-          image={post.image}
-          text={post.text}
-          timestamp={post.timestamp}
-          username={post.username}
-        />
-      ))}
-    </>
-  )
-}
+      <Router>
+        <Switch>
+          <Route path='/About'>
+            <Test></Test>
+          </Route>
+        </Switch>
+        <Link to='/tesst'>aaaa</Link>
+      </Router>
 
+      <TweetInput />
+
+      {posts[0]?.id && (
+        <>
+          {posts.map(post => (
+            <Post
+              key={post.id}
+              postId={post.id}
+              avatar={post.avatar}
+              image={post.image}
+              text={post.text}
+              timestamp={post.timestamp}
+              username={post.username}
+            />
+          ))}
+        </>
+      )}
     </div>
   )
 }

@@ -3,5 +3,5 @@
   overflow-y: scroll;
 }
 .feed::-webkit-scrollbar {
-  display: none;
+  display: none;	
 }

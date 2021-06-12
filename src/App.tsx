@@ -5,8 +5,10 @@ import { selectUser, login, logout } from './features/userSlice'
 import { auth } from './firebase'
 import Feed from './components/Feed'
 import Auth from './components/Auth'
+import Test from './components/Test'
 // import Auth from './components/Auth'
 // import Feed from './components/Feed'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 const App: React.FC = () => {
   const user = useSelector(selectUser)
@@ -34,7 +36,10 @@ const App: React.FC = () => {
     <>
       {user.uid ? (
         <div className={style.app}>
-          <Feed />
+          <Test />
+
+          
+          
         </div>
       ) : (
         <Auth />
