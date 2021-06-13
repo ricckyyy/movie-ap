@@ -58,6 +58,7 @@ const Post: React.FC<PROPS> = props => {
         setComments(
           snapshot.docs.map(doc => ({
             id: doc.id,
+            move_id: 123,
             avatar: doc.data().avatar,
             text: doc.data().text,
             username: doc.data().username,

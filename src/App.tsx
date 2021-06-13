@@ -3,9 +3,9 @@ import style from './App.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectUser, login, logout } from './features/userSlice'
 import { auth } from './firebase'
-import Feed from './components/pages/Feed'
+import Feed from './components/pages/feed/Feed'
 import Auth from './components/Auth'
-import Test from './components/Test'
+import Home from './components/pages/home/Home'
 // import Auth from './components/Auth'
 // import Feed from './components/Feed'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -36,10 +36,7 @@ const App: React.FC = () => {
     <>
       {user.uid ? (
         <div className={style.app}>
-          <Test />
-
-          
-          
+          <Home />
         </div>
       ) : (
         <Auth />

@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import Feed from './pages/Feed'
-
-const Test = () => {
+import Feed from '../pages/feed/Feed'
+import Movie from '../pages/movie/Movie'
+const Menu = () => {
   return (
     <Router>
       <div>
@@ -21,14 +21,14 @@ const Test = () => {
         </nav>
 
         <Switch>
+          <Route path='/'>
+            <Movie />
+          </Route>
           <Route path='/about'>
             <Feed />
           </Route>
           <Route path='/users'>
             <Users />
-          </Route>
-          <Route path='/'>
-            <Home />
           </Route>
         </Switch>
       </div>
@@ -36,16 +36,8 @@ const Test = () => {
   )
 }
 
-const Home = () => {
-  return <h2>Home</h2>
-}
-
-const About = () => {
-  return <h2>About</h2>
-}
-
 const Users = () => {
   return <h2>Users</h2>
 }
 
-export default Test
+export default Menu
