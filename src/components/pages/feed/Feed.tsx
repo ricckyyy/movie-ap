@@ -2,7 +2,6 @@ import React, { useState, useEffect, Component } from 'react'
 import { db } from '../../../firebase'
 import TweetInput from '../../TweetInput'
 import style from './Feed.module.css'
-import { PostAdd } from '@material-ui/icons'
 import Post from '../../templates/Post'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
@@ -46,6 +45,15 @@ const Feed: React.FC = () => {
 
   return (
     <div className={style.feed}>
+      <Router>
+        <Switch>
+          <Route path='/About'>
+            <Test></Test>
+          </Route>
+        </Switch>
+        <Link to='/tesst'>aaaa</Link>
+      </Router>
+
       <TweetInput />
 
       {posts[0]?.id && (

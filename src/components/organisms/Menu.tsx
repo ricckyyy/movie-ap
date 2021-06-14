@@ -1,7 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Feed from '../pages/feed/Feed'
+import Home from '../pages/home/Home'
 import Movie from '../pages/movie/Movie'
+
 const Menu = () => {
   return (
     <Router>
@@ -12,7 +14,10 @@ const Menu = () => {
               <Link to='/'>Home</Link>
             </li>
             <li>
-              <Link to='/about'>About</Link>
+              <Link to='/movie'>Movie</Link>
+            </li>
+            <li>
+              <Link to='/feed'>Feed</Link>
             </li>
             <li>
               <Link to='/users'>Users</Link>
@@ -21,15 +26,12 @@ const Menu = () => {
         </nav>
 
         <Switch>
-          <Route path='/'>
-            <Movie />
-          </Route>
-          <Route path='/about'>
-            <Feed />
-          </Route>
+          <Route path='/movie' component={Movie} />
+          <Route path='/feed' component={Feed} />
           <Route path='/users'>
             <Users />
           </Route>
+          <Route path='/memu' component={Home} />
         </Switch>
       </div>
     </Router>

@@ -13,7 +13,6 @@ import {
   Grid,
   Typography,
   makeStyles,
-  Modal,
   IconButton,
   Box
 } from '@material-ui/core'
@@ -210,14 +209,14 @@ const Auth: React.FC = () => {
                   ? async () => {
                       try {
                         await signInEmail()
-										} catch (err:any) {
+                      } catch (err) {
                         alert(err.message)
                       }
                     }
                   : async () => {
                       try {
                         await signUpEmail()
-                      } catch (err:any) {
+                      } catch (err) {
                         alert(err.message)
                       }
                     }
