@@ -3,7 +3,7 @@ import style from './App.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectUser, login, logout } from './features/userSlice'
 import { auth } from './firebase'
-import Auth from './components/Auth'
+import Auth from './components/pages/auth/Auth'
 import Home from './components/pages/home/Home'
 
 const App: React.FC = () => {

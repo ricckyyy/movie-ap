@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import style from './Auth.module.css'
 import { useDispatch } from 'react-redux'
-import { updateUserProfile } from '../features/userSlice'
-import { auth, provider, storage } from '../firebase'
+import { updateUserProfile } from '../../../features/userSlice'
+import { auth, provider, storage } from '../../../firebase'
 
 import {
   Avatar,
@@ -17,8 +17,6 @@ import {
   Box
 } from '@material-ui/core'
 
-// import SendIcon from '@material-ui/icons/Send'
-// import CameraIcon from '@material-ui/icons/Camera'
 import EmailIcon from '@material-ui/icons/Email'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
