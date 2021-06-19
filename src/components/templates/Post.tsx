@@ -47,7 +47,7 @@ const Post: React.FC<PROPS> = props => {
       timestamp: null
     }
   ])
-
+  // データ取得
   useEffect(() => {
     const unSub = db
       .collection('posts')
@@ -57,7 +57,7 @@ const Post: React.FC<PROPS> = props => {
       .onSnapshot(snapshot => {
         setComments(
           snapshot.docs.map(doc => ({
-            id: doc.id,
+            id: doc.data().id,
             move_id: 123,
             avatar: doc.data().avatar,
             text: doc.data().text,
@@ -66,20 +66,22 @@ const Post: React.FC<PROPS> = props => {
           }))
         )
       })
-
     return () => {
       unSub()
     }
   }, [props.postId])
 
+  // コメント
   const newComment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     db.collection('posts')
       .doc(props.postId)
       .collection('comments')
       .add({
+        id: 1,
         avatar: user.photoUrl,
         text: comment,
+        move_id: 123,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         username: user.displayName
       })
@@ -88,6 +90,7 @@ const Post: React.FC<PROPS> = props => {
 
   return (
     <div className={styles.post}>
+      {/* Post */}
       <div className={styles.post_avater}>
         <Avatar src={props.avatar} />
       </div>
@@ -105,6 +108,7 @@ const Post: React.FC<PROPS> = props => {
             <p>{props.text}</p>
           </div>
         </div>
+
         {props.image && (
           <div className={styles.post_tweetImage}>
             <img src={props.image} alt='tweet' />

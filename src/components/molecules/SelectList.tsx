@@ -1,9 +1,6 @@
 import React, { useState, useEffect, Component } from 'react'
-import { db } from '../../../firebase'
-import MovieInput from './MovieInput'
-import { BrowserRouter, Router, Switch, Route, Link } from 'react-router-dom'
-import User from '../user/User'
-import Feed from '../feed/Feed'
+import Select from 'react-select'
+import { db, auth } from '../../firebase'
 
 interface PROPS {
   postId: string
@@ -12,17 +9,21 @@ interface PROPS {
   text: string
   timestamp: any
   username: string
+  value: string
+  label: string
 }
 
-const Movie: React.FC<PROPS> = props => {
+const SelectList: React.FC<PROPS> = props => {
   const [posts, setPosts] = useState([
     {
-      id: '',
+      id: '111',
       avatar: '',
       image: '',
       text: '',
       timestamp: null,
-      username: ''
+      username: '',
+      value: '',
+      label: ''
     }
   ])
   useEffect(() => {
@@ -37,7 +38,9 @@ const Movie: React.FC<PROPS> = props => {
             image: doc.data().image,
             text: doc.data().text,
             timestamp: doc.data().timestamp,
-            username: doc.data().username
+            username: doc.data().username,
+            value: doc.data().text,
+            label: doc.data().text
           }))
         )
       )
@@ -48,25 +51,9 @@ const Movie: React.FC<PROPS> = props => {
 
   return (
     <div>
-      <MovieInput />
-      {posts.map(post => (
-        <div>
-          <BrowserRouter>
-            <div>
-              <Link to='/feed/1'>{post.text}</Link>
-              <Switch>
-                <Route path='/feed/1' component={Feed}></Route>;
-              </Switch>
-            </div>
-          </BrowserRouter>
-          {/* <div>
-            <h2>{post.text}</h2>
-          </div> */}
-          <span>{post.id}</span>
-        </div>
-      ))}
+      <Select options={posts} />
     </div>
   )
 }
 
-export default Movie
+export default SelectList

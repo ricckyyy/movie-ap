@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import SelectList from '../molecules/SelectList'
 import Feed from '../pages/feed/Feed'
 import Home from '../pages/home/Home'
 import Movie from '../pages/movie/Movie'
@@ -20,7 +21,7 @@ const Menu = () => {
               <Link to='/feed'>Feed</Link>
             </li>
             <li>
-              <Link to='/users'>Users</Link>
+              <Link to='/user'>Users</Link>
             </li>
           </ul>
         </nav>
@@ -28,18 +29,15 @@ const Menu = () => {
         <Switch>
           <Route path='/movie' component={Movie} />
           <Route path='/feed' component={Feed} />
-          <Route path='/users'>
+          <Route path='/user' component={SelectList} />
+          {/* <Route path='/users'>
             <Users />
-          </Route>
+          </Route> */}
           <Route path='/memu' component={Home} />
         </Switch>
       </div>
     </Router>
   )
-}
-
-const Users = () => {
-  return <h2>Users</h2>
 }
 
 export default Menu
