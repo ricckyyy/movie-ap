@@ -14,7 +14,14 @@ interface PROPS {
 }
 
 const User: React.FC<PROPS> = props => {
-  const [posts, setPosts] = useState([
+  const [val, setVal] = useState('')
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value)
+    setVal(e.target.value)
+  }
+
+  const [movieid, setMovieId] = useState('')
+  const [movie, setMovie] = useState([
     {
       id: '111',
       avatar: '',
@@ -27,11 +34,10 @@ const User: React.FC<PROPS> = props => {
     }
   ])
   useEffect(() => {
-    const unSub = db
-      .collection('movies')
+    db.collection('movies')
       .orderBy('timestamp', 'desc')
       .onSnapshot(snapshot =>
-        setPosts(
+        setMovie(
           snapshot.docs.map(doc => ({
             id: doc.id,
             avatar: doc.data().avatar,
@@ -44,21 +50,31 @@ const User: React.FC<PROPS> = props => {
           }))
         )
       )
-    return () => {
-      unSub()
-    }
+    console.log(movie)
+    return () => {}
   }, [])
-
-  // const options = [
-  //   { value: 'chocolate', label: 'Chocolate' },
-  //   { value: 'strawberry', label: 'Strawberry' },
-  //   { value: 'vanilla', label: 'Vanilla' }
-  // ]
 
   return (
     <div>
       {/* <Tag /> */}
-      <Select options={posts} />
+      <Select options={movie}></Select>
+      <h2>{val}</h2>
+      {/* <h2>{posts}</h2> */}
+      <div>
+        <select
+          name='pets'
+          id='pet-select'
+          onChange={e => setMovieId(e.target.value)}
+        >
+          {movie.map((value, key) => {
+            return (
+              <option key={key} value={value.id}>
+                {value.text}
+              </option>
+            )
+          })}
+        </select>
+      </div>
     </div>
   )
 }

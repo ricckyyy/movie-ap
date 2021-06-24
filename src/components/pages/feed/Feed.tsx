@@ -4,12 +4,8 @@ import TweetInput from '../../templates/TweetInput'
 import style from './Feed.module.css'
 import Post from '../../templates/Post'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-
-class Test extends Component {
-  render () {
-    return <h1>test</h1>
-  }
-}
+import MovieList from '../movie/MovieList'
+import SelectList from '../../molecules/SelectList'
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState([
@@ -22,6 +18,7 @@ const Feed: React.FC = () => {
       username: ''
     }
   ])
+
   useEffect(() => {
     const unSub = db
       .collection('posts')
@@ -45,15 +42,6 @@ const Feed: React.FC = () => {
 
   return (
     <div className={style.feed}>
-      <Router>
-        <Switch>
-          <Route path='/About'>
-            <Test></Test>
-          </Route>
-        </Switch>
-        <Link to='/tesst'>aaaa</Link>
-      </Router>
-
       <TweetInput />
 
       {posts[0]?.id && (

@@ -1,23 +1,25 @@
 import React, { useState, useEffect, Component } from 'react'
 import { db } from '../../../firebase'
 import MovieInput from './MovieInput'
+import MovieList from './MovieList'
 import { BrowserRouter, Router, Switch, Route, Link } from 'react-router-dom'
 import User from '../user/User'
 import Feed from '../feed/Feed'
 
 interface PROPS {
   postId: string
+  movieid: string
   avatar: string
   image: string
   text: string
   timestamp: any
   username: string
 }
-
 const Movie: React.FC<PROPS> = props => {
-  const [posts, setPosts] = useState([
+  const [titles, setTitles] = useState([
     {
       id: '',
+      movieid: '',
       avatar: '',
       image: '',
       text: '',
@@ -30,9 +32,10 @@ const Movie: React.FC<PROPS> = props => {
       .collection('movies')
       .orderBy('timestamp', 'desc')
       .onSnapshot(snapshot =>
-        setPosts(
+        setTitles(
           snapshot.docs.map(doc => ({
             id: doc.id,
+            movieid: doc.data().movieid,
             avatar: doc.data().avatar,
             image: doc.data().image,
             text: doc.data().text,
@@ -49,21 +52,17 @@ const Movie: React.FC<PROPS> = props => {
   return (
     <div>
       <MovieInput />
-      {posts.map(post => (
-        <div>
-          <BrowserRouter>
-            <div>
-              <Link to='/feed/1'>{post.text}</Link>
-              <Switch>
-                <Route path='/feed/1' component={Feed}></Route>;
-              </Switch>
-            </div>
-          </BrowserRouter>
-          {/* <div>
-            <h2>{post.text}</h2>
-          </div> */}
-          <span>{post.id}</span>
-        </div>
+      {titles.map(post => (
+        <MovieList
+          key={post.id}
+          movieid={post.movieid}
+          postId={post.id}
+          avatar={post.avatar}
+          image={post.image}
+          text={post.text}
+          timestamp={post.timestamp}
+          username={post.username}
+        />
       ))}
     </div>
   )

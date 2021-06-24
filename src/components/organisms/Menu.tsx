@@ -4,6 +4,7 @@ import SelectList from '../molecules/SelectList'
 import Feed from '../pages/feed/Feed'
 import Home from '../pages/home/Home'
 import Movie from '../pages/movie/Movie'
+import User from '../pages/user/User'
 
 const Menu = () => {
   return (
@@ -29,7 +30,7 @@ const Menu = () => {
         <Switch>
           <Route path='/movie' component={Movie} />
           <Route path='/feed' component={Feed} />
-          <Route path='/user' component={SelectList} />
+          <Route path='/user' component={User} />
           {/* <Route path='/users'>
             <Users />
           </Route> */}

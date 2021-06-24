@@ -7,6 +7,7 @@ import { Avatar, Button, IconButton } from '@material-ui/core'
 import firebase from 'firebase/app'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 import Select from 'react-select'
+import SelectList from '../molecules/SelectList'
 firebase.firestore().settings({
   ignoreUndefinedProperties: true
 })
@@ -15,11 +16,18 @@ const TweetInput: React.FC = () => {
   const user = useSelector(selectUser)
   const [tweetImage, setTweetImage] = useState<File | null>(null)
   const [tweetMsg, setTweetMsg] = useState('')
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
+  const [posts, setPosts] = useState([
+    {
+      id: '',
+      avatar: '',
+      image: '',
+      text: '',
+      timestamp: null,
+      username: '',
+      value: '',
+      label: ''
+    }
+  ])
 
   const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files![0]) {
@@ -72,6 +80,7 @@ const TweetInput: React.FC = () => {
     setTweetImage(null)
     setTweetMsg('')
   }
+
   return (
     <>
       <form onSubmit={sendTweet}>
@@ -84,7 +93,19 @@ const TweetInput: React.FC = () => {
             }}
           />
           <form>
-            <Select options={options} />
+            {posts.map(post => (
+              <SelectList
+                key={post.id}
+                postId={post.id}
+                avatar={post.avatar}
+                image={post.image}
+                text={post.text}
+                timestamp={post.timestamp}
+                username={post.username}
+                value={post.text}
+                label={post.text}
+              />
+            ))}
 
             <input
               className={styles.tweet_input}

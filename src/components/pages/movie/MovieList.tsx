@@ -1,20 +1,20 @@
 import React, { useState, useEffect, Component } from 'react'
-import Select from 'react-select'
-import { db, auth } from '../../firebase'
+import { db } from '../../../firebase'
+import { BrowserRouter, Router, Switch, Route, Link } from 'react-router-dom'
+import Feed from '../feed/Feed'
 
 interface PROPS {
   postId: string
+  movieid: string
   avatar: string
   image: string
   text: string
   timestamp: any
   username: string
-  value: string
-  label: string
 }
 
-const SelectList: React.FC<PROPS> = props => {
-  const [posts, setPosts] = useState([
+const MovieList: React.FC<PROPS> = props => {
+  const [titles, setTitles] = useState([
     {
       id: '',
       movieid: '',
@@ -22,9 +22,7 @@ const SelectList: React.FC<PROPS> = props => {
       image: '',
       text: '',
       timestamp: null,
-      username: '',
-      value: '',
-      label: ''
+      username: ''
     }
   ])
   useEffect(() => {
@@ -32,7 +30,7 @@ const SelectList: React.FC<PROPS> = props => {
       .collection('movies')
       .orderBy('timestamp', 'desc')
       .onSnapshot(snapshot =>
-        setPosts(
+        setTitles(
           snapshot.docs.map(doc => ({
             id: doc.id,
             movieid: doc.data().movieid,
@@ -40,9 +38,7 @@ const SelectList: React.FC<PROPS> = props => {
             image: doc.data().image,
             text: doc.data().text,
             timestamp: doc.data().timestamp,
-            username: doc.data().username,
-            value: doc.data().text,
-            label: doc.data().text
+            username: doc.data().username
           }))
         )
       )
@@ -53,9 +49,25 @@ const SelectList: React.FC<PROPS> = props => {
 
   return (
     <div>
-      <Select options={posts} />
+      {titles.map(post => (
+        <div>
+          <BrowserRouter>
+            <div>
+              <Link to='/feed/1'>{post.text}</Link>
+              <Switch>
+                <Route path='/feed' component={Feed}></Route>
+              </Switch>
+            </div>
+          </BrowserRouter>
+
+          <span>{post.id}</span>
+          <div>
+            <h2>{post.movieid}</h2>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
 
-export default SelectList
+export default MovieList

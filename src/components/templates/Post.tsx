@@ -8,7 +8,7 @@ import { Avatar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import MessageIcon from '@material-ui/icons/Message'
 import SendIcon from '@material-ui/icons/Send'
-
+import Movie from '../pages/movie/Movie'
 interface PROPS {
   postId: string
   avatar: string
@@ -58,11 +58,12 @@ const Post: React.FC<PROPS> = props => {
         setComments(
           snapshot.docs.map(doc => ({
             id: doc.data().id,
-            move_id: 123,
             avatar: doc.data().avatar,
             text: doc.data().text,
             username: doc.data().username,
-            timestamp: doc.data().timestamp
+            timestamp: doc.data().timestamp,
+            value: doc.data().text,
+            label: doc.data().text
           }))
         )
       })
@@ -81,7 +82,6 @@ const Post: React.FC<PROPS> = props => {
         id: 1,
         avatar: user.photoUrl,
         text: comment,
-        move_id: 123,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         username: user.displayName
       })
@@ -106,6 +106,7 @@ const Post: React.FC<PROPS> = props => {
           </div>
           <div className={styles.post_tweet}>
             <p>{props.text}</p>
+            <p>{/* <Movie /> */}</p>
           </div>
         </div>
 
